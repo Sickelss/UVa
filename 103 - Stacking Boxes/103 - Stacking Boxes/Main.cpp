@@ -113,11 +113,15 @@ void stackBoxes(std::vector<Box> boxArr)
 				myStream >> boxArr[i].dimenArr[j];
 			}
 		}
+		// I'll leave some extra ouptuts here to show the arrays
+		std::cout << "\n";
 		printArr(boxArr);
 		boxArr = sortBoxes(boxArr);
+		std::cout << "After sorting: \n";
 		printArr(boxArr);
 		nestBoxes(boxArr);
 	}
+	myStream.close();
 }
 
 int main()
