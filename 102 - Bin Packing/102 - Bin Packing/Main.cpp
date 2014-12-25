@@ -5,14 +5,16 @@
 #include <fstream>
 #include <array>
 #include <string>
-using namespace std;
+#include <time.h>
+#include <chrono>
 
+// The problem is found here:
 // http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=3&page=show_problem&problem=38
 
 void binPack(long arr[])
 {
 	long minSum = 99999999;
-	string order;
+	std::string order;
 	// BGC in arr[], 036 147 258
 	int currentSum = arr[3]+arr[6] + arr[2]+arr[8] + arr[1]+arr[4];
 	if (currentSum < minSum)
@@ -51,18 +53,20 @@ void binPack(long arr[])
 		order = "GCB";
 	}
 	// I hate this, but it works...
-	cout << order << " " << minSum << "\n";
+	std::cout << order << " " << minSum << "\n";
 }
 
 int main()
 {
+	//clock_t t = clock();	// since Chrono is portable and generally better, I'll switch to that.
+	std::chrono::high_resolution_clock::time_point time = std::chrono::high_resolution_clock::now();
 	long bArr[9];
-	ifstream myfile ("input.txt");
+	std::ifstream myfile ("input.txt");
 	if (myfile.is_open())
 	{
 		while (!myfile.eof())
 		{
-			for (int i = 0; i < 9; i++)
+			for (int i = 0; i < 9; ++i)
 			{
 				myfile >> bArr[i];
 			}
@@ -70,5 +74,9 @@ int main()
 		}
 	}
 
-	cin.ignore();
+	//t = clock() - t;
+	//std::cout << "\n" << "run time: " << ((float)t) / CLOCKS_PER_SEC;
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - time);
+	std::cout << "Execution time (microseconds): " << duration.count() << "\n";
+	std::cin.ignore();
 }

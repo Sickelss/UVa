@@ -4,17 +4,19 @@
 #include <iostream>
 #include <fstream>
 #include <array>
+#include <chrono>
 #include "Box.h"
 
-// http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=3&page=show_problem&problem=39
-
+/*
+http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=3&page=show_problem&problem=39
+*/
 
 void printArr(std::vector<Box> arr)
 {
-	for (int i = 0; i < arr.size(); i++)
+	for (int i = 0; i < arr.size(); ++i)
 	{
 		std::cout << "Box " << arr[i].num << ": ";
-		for (int j = 0; j < arr[i].dimenArr.size(); j++)
+		for (int j = 0; j < arr[i].dimenArr.size(); ++j)
 		{
 			std::cout << arr[i].dimenArr[j] << " ";
 		}
@@ -30,7 +32,7 @@ std::vector<Box> sortBoxes(std::vector<Box> arr)
 	Due to this property, we can also infer that the box b1, will always have n-dimensional volume less than that of b2 in order to nest.
 	By sorting the boxes by n-dimensional volume, we can quickly cut down on iteration time later.
 	*/
-	for (int i = 0; i < arr.size(); i++)
+	for (int i = 0; i < arr.size(); ++i)
 	{
 		arr[i].dimenSort();
 		arr[i].updateVol();
@@ -41,7 +43,7 @@ std::vector<Box> sortBoxes(std::vector<Box> arr)
 
 bool doesNest(Box b1, Box b2)
 {
-	for (int i = 0; i < b1.dimenArr.size(); i++)
+	for (int i = 0; i < b1.dimenArr.size(); ++i)
 	{
 		if (b1.dimenArr[i] > b2.dimenArr[i])
 			return false;
@@ -62,7 +64,7 @@ void nestBoxes(std::vector<Box> arr)
 		std::vector<int> nestOrder;
 		int currentNestLength = 1;
 		nestOrder.push_back(arr[i].num);
-		for (int j = i; j < arr.size() - 1; j++)
+		for (int j = i; j < arr.size() - 1; ++j)
 		{	//this for loop will change the column in our 2d array.
 			if (doesNest(arr[j], arr[j + 1]))
 			{
@@ -84,19 +86,20 @@ void nestBoxes(std::vector<Box> arr)
 		{
 			stop = true;
 		}
-		i++;
+		++i;
 	}
 	// output maxNestLength and nestOrder
 	std::cout << maxNestLength << "\n";
-	for (int i = 0; i < maxNestLength; i++)
+	for (int i = 0; i < maxNestLength; ++i)
 	{
 		std::cout << finalNestOrder[i] << " ";
 	}
 	std::cout << "\n";
 }
 
-void stackBoxes(std::vector<Box> boxArr)
+void stackBoxes()
 {
+	std::vector<Box> boxArr;
 	int numBoxes = 0;
 	int numDims = 0;
 	std::fstream myStream("input.txt");
@@ -105,20 +108,21 @@ void stackBoxes(std::vector<Box> boxArr)
 		myStream >> numBoxes;
 		myStream >> numDims;
 		boxArr.resize(numBoxes);
-		for (int i = 0; i < numBoxes; i++)
+		for (int i = 0; i < numBoxes; ++i)
 		{
 			boxArr[i].setNum(i, numDims);
-			for (int j = 0; j < numDims; j++)
+			for (int j = 0; j < numDims; ++j)
 			{
 				myStream >> boxArr[i].dimenArr[j];
 			}
 		}
-		// I'll leave some extra ouptuts here to show the arrays
+
+		// I'll leave some extra ouptuts here to show the arrays, but if I need an accurate execution time, remove these.
 		std::cout << "\n";
-		printArr(boxArr);
+		printArr(boxArr);	//
 		boxArr = sortBoxes(boxArr);
 		std::cout << "After sorting: \n";
-		printArr(boxArr);
+		printArr(boxArr);  //
 		nestBoxes(boxArr);
 	}
 	myStream.close();
@@ -126,9 +130,11 @@ void stackBoxes(std::vector<Box> boxArr)
 
 int main()
 {
-	std::vector<Box> boxArr;
-	
-	stackBoxes(boxArr);
+	std::chrono::high_resolution_clock::time_point time = std::chrono::high_resolution_clock::now();
 
+	stackBoxes();
+
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - time);
+	std::cout << "Execution time (microseconds): " << duration.count() << "\n";
 	std::cin.ignore();
 }

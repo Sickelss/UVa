@@ -6,8 +6,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <time.h>
 
-using namespace std;
 // http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=3&page=show_problem&problem=37
 // I've fixed this solution, no more scouring across the array each time stack is called.
 // Maybe next time don't put it all in one big file, these problems are getting too big for that.
@@ -21,7 +21,7 @@ public:
 	bool originalPos;	//original position flag for printing
 };
 
-vector<Block> unstack(vector<Block> bArr,int pos)	
+std::vector<Block> unstack(std::vector<Block> bArr,int pos)	
 {
 	int test;
 	test = bArr[pos].blockBelow;
@@ -33,7 +33,7 @@ vector<Block> unstack(vector<Block> bArr,int pos)
 	return bArr;
 }
 
-vector<Block> stackA(vector<Block> bArr, int start, int end)
+std::vector<Block> stackA(std::vector<Block> bArr, int start, int end)
 {
 	int test;
 	if (bArr[start].originalPos == false)	// this will unhook the block below the starting block
@@ -56,7 +56,7 @@ vector<Block> stackA(vector<Block> bArr, int start, int end)
 }
 
 // returns true in the event: the start and end blocks are in the same pile already.
-bool checkStack(vector<Block> bArr, int start, int end)
+bool checkStack(std::vector<Block> bArr, int start, int end)
 {
 	int check = start;
 	while (bArr[check].blockAbove != -1)
@@ -73,7 +73,7 @@ bool checkStack(vector<Block> bArr, int start, int end)
 	return false;
 }
 
-vector<Block> blockMove(vector<Block> bArr, string com, int start, int end)
+std::vector<Block> blockMove(std::vector<Block> bArr, std::string com, int start, int end)
 {
 	bool check = checkStack(bArr, start, end);		//first we check the for invalid moves
 	if (check)
@@ -104,43 +104,43 @@ vector<Block> blockMove(vector<Block> bArr, string com, int start, int end)
 	return bArr;
 }
 
-void print2(vector<Block> bArr, int i)
+void print2(std::vector<Block> bArr, int i)
 {
 	if (bArr[i].blockAbove != -1)
 	{
-		cout << " " << bArr[i].blockAbove;
+		std::cout << " " << bArr[i].blockAbove;
 		print2(bArr, bArr[i].blockAbove);
 	}
 }
 
-void printBlocks(vector<Block> bArr)
+void printBlocks(std::vector<Block> bArr)
 {
-	for (int i=0; i<bArr.size(); i++)
+	for (int i=0; i<bArr.size(); ++i)
 	{
-		cout << i << ":";
+		std::cout << i << ":";
 		if (bArr[i].originalPos == true)
 		{
-			cout << " " << bArr[i].id;
+			std::cout << " " << bArr[i].id;
 			print2(bArr, i);
 		}
-		cout << "\n";
+		std::cout << "\n";
 	}
 }
 
 
 int main()
 {
-
+	clock_t t = clock();
 	int size = 1;
-	string commandA;
-	string commandB;
-	string commandC;
-	string commandD;
+	std::string commandA;
+	std::string commandB;
+	std::string commandC;
+	std::string commandD;
 	int blockToMove = 0;
 	int positionToMove = 0;
-	vector<Block> bArr;	//like an array, but re-sizable
+	std::vector<Block> bArr;	//like an array, but re-sizable
 
-	ifstream myfile ("input.txt");
+	std::ifstream myfile ("input.txt");
 	if (myfile.is_open())
 	{
 		bool quit = false;
@@ -177,5 +177,7 @@ int main()
 	myfile.close();
 	
 	printBlocks(bArr);
-	cin.ignore();
+	t = clock() - t;
+	std::cout << "\n" << "run time: " << ((float)t) / CLOCKS_PER_SEC;
+	std::cin.ignore();
 }
