@@ -102,7 +102,35 @@ void stackBoxes()
 	std::vector<Box> boxArr;
 	int numBoxes = 0;
 	int numDims = 0;
-	std::fstream myStream("input.txt");
+	while (std::cin.peek() != 10)
+	{
+		std::cin >> numBoxes;
+		std::cin >> numDims;
+		boxArr.resize(numBoxes);
+		for (int i = 0; i < numBoxes; ++i)
+		{
+			boxArr[i].setNum(i, numDims);
+			for (int j = 0; j < numDims; ++j)
+			{
+				std::cin >> boxArr[i].dimenArr[j];
+			}
+		}
+
+		// I'll leave some extra ouptuts here to show the arrays, but if I need an accurate execution time, remove these.
+		std::cout << "\n";
+		boxArr = sortBoxes(boxArr);
+		//printArr(boxArr);  //
+		nestBoxes(boxArr);
+		std::cin.ignore();
+	}
+}
+
+void stackBoxes(std::string file)
+{
+	std::vector<Box> boxArr;
+	int numBoxes = 0;
+	int numDims = 0;
+	std::fstream myStream(file);
 	while (!myStream.eof())
 	{
 		myStream >> numBoxes;
@@ -132,7 +160,7 @@ int main()
 {
 	std::chrono::high_resolution_clock::time_point time = std::chrono::high_resolution_clock::now();
 
-	stackBoxes();
+	stackBoxes("input.txt");
 
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - time);
 	std::cout << "Execution time (microseconds): " << duration.count() << "\n";

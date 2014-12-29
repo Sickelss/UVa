@@ -72,7 +72,7 @@ void arbitrage(std::vector <std::vector<double>> arr)
 
 	if (profitMar > 1.01)
 	{
-		std::cout << "Profit: " << profitMar << " \n";
+		//std::cout << "Profit: " << profitMar << " \n";	// Outputs the profit multiplier. This should be over 1.01 for a proper arbitrage sequence.
 		for (int i = 1; i < path.size(); ++i)
 		{
 			std::cout << " " << path[i] + 1;
@@ -85,13 +85,11 @@ void arbitrage(std::vector <std::vector<double>> arr)
 	std::cout << "\n\n";
 }
 
-
-int main()
+void readInputs(std::string file)
 {
-	std::chrono::high_resolution_clock::time_point time = std::chrono::high_resolution_clock::now();
 	std::vector <std::vector <double>> arr;
 
-	std::fstream myfile("input.txt");	// input file
+	std::fstream myfile(file);	// input file
 	while (!myfile.eof())
 	{
 		int size = 0;
@@ -121,7 +119,47 @@ int main()
 	}
 
 	myfile.close();
+}
+
+void readInputs()
+{
+	std::vector <std::vector <double>> arr;
+	while (std::cin.peek() != 10)
+	{
+		int size = 0;
+		std::cin >> size;
+		arr.resize(size);
+		for (int k = 0; k < size; k++)
+		{
+			arr[k].resize(size);
+		}
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				if (j == i)
+				{
+					arr[i][j] = 1;
+				}
+				else
+				{
+					std::cin >> arr[i][j];
+				}
+			}
+		}
+		// outputs
+		//printArr(arr);
+		arbitrage(arr);		// find the arbitrage paths
+		std::cin.ignore();
+	}
+}
+
+int main()
+{
+	std::chrono::high_resolution_clock::time_point time = std::chrono::high_resolution_clock::now();
 	
+	readInputs("input.txt");
+
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - time);
 	std::cout << "Exection time (microseconds): " << duration.count() << "\n";
 	std::cin.ignore();
