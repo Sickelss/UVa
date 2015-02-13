@@ -1,0 +1,23 @@
+﻿Build started 2/5/2015 1:13:44 AM.
+     1>Project "C:\Users\Seth\Documents\Visual Studio 2013\Projects\108 - Maximum Sum\108 - Maximum Sum\108 - Maximum Sum.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp
+         Main.cpp
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(22): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(24): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(40): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(42): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(49): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(51): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(57): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(59): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(84): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\seth\documents\visual studio 2013\projects\108 - maximum sum\108 - maximum sum\main.cpp(94): warning C4018: '<' : signed/unsigned mismatch
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Seth\Documents\Visual Studio 2013\Projects\108 - Maximum Sum\Debug\108 - Maximum Sum.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Seth\Documents\Visual Studio 2013\Projects\108 - Maximum Sum\Debug\108 - Maximum Sum.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Seth\Documents\Visual Studio 2013\Projects\108 - Maximum Sum\Debug\108 - Maximum Sum.lib" /MACHINE:X86 Debug\Main.obj
+         108 - Maximum Sum.vcxproj -> C:\Users\Seth\Documents\Visual Studio 2013\Projects\108 - Maximum Sum\Debug\108 - Maximum Sum.exe
+     1>Done Building Project "C:\Users\Seth\Documents\Visual Studio 2013\Projects\108 - Maximum Sum\108 - Maximum Sum\108 - Maximum Sum.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.94
